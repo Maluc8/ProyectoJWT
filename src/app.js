@@ -10,6 +10,8 @@ import cartRouter from "./routes/cartsRoutes.js";
 import productRouter from "./routes/productsRoutes.js";
 import sessionRouter from "./routes/sessionRoutes.js";
 import userRouter from "./routes/userRoutes.js";
+import initializePassport from "./config/passport.config.js";
+import passport from "passport";
 
 dotenv.config();
 
@@ -34,6 +36,7 @@ app.use(
 initializePassport();
 app.use("/api/sessions", sessionRouter);
 app.use("/api/users", userRouter);
+app.use(passport.session());
 
 void (async () => {
   await mongoose
@@ -89,8 +92,4 @@ void (async () => {
   app.delete("/api/carts", cartRouter);
   app.delete("/api/carts/:cid/products/:pid", cartRouter);
   app.delete("/api/carts/:cid", cartRouter);
-
-  //Users
-
-  app.get();
 })();
