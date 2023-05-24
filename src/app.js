@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import { body } from "express-validator";
 import mongoStore from "connect-mongo";
 import cookieParser from "cookie-parser";
+import session from "express-session";
 
 import cartRouter from "./routes/cartsRoutes.js";
 import productRouter from "./routes/productsRoutes.js";
@@ -20,23 +21,6 @@ const app = express();
 //const publicPath = path.resolve("./public");
 
 //app.use(express.static(publicPath));
-app.use(express.urlencoded({ etended: true }));
-app.use(cookieParser());
-app.use(
-  session({
-    store: mongoStore.create({
-      mongoUrl: process.env.MONGO_DB_URI,
-      ttl: 10,
-    }),
-    secret: "CoderS3cR3tC0d3",
-    resave: false,
-    saveUninitialized: false,
-  })
-);
-initializePassport();
-app.use("/api/sessions", sessionRouter);
-app.use("/api/users", userRouter);
-app.use(passport.session());
 
 void (async () => {
   await mongoose
@@ -49,6 +33,25 @@ void (async () => {
   app.listen(8080, () => {
     console.log("Server is listening on port 8080...");
   });
+
+  app.use(express.urlencoded({ extended: true }));
+  app.use(cookieParser());
+  app.use(
+    session({
+      store: mongoStore.create({
+        mongoUrl: process.env.MONGO_DB_URI,
+        ttl: 10,
+        dbName: "ecommerce",
+      }),
+      secret: process.env.PRIVATE_KEY,
+      resave: false,
+      saveUninitialized: false,
+    })
+  );
+  initializePassport();
+  app.use("/api/sessions", sessionRouter);
+  app.use("/api/users", userRouter);
+  app.use(passport.session());
 
   //Products
 

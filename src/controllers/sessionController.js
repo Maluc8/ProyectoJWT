@@ -1,4 +1,4 @@
-import UserManager from "../managers/userManager";
+import UserManager from "../managers/userManager.js";
 import { createHash, generateToken, isValidPassword } from "../utils/index.js";
 
 export const login = async (req, res) => {

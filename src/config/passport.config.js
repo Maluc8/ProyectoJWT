@@ -1,15 +1,15 @@
 import passport from "passport";
 import local from "passport-local";
-import UserManager from "../managers/userManager";
-import { createHash, isValidPassword } from "../utils/index";
+import UserManager from "../managers/userManager.js";
+import { createHash, isValidPassword } from "../utils/index.js";
 
 const localEstrategy = local.Strategy;
 
 export const register = async (req, res) => {
   try {
     const manager = new UserManager();
-    let user = await manager.getOneByEmail(req.body.email);
-    if (user.id) {
+    let newUser = await manager.getOneByEmail(req.body.email);
+    if (newUser.id) {
       return done, false;
     }
     const dto = {
@@ -50,7 +50,7 @@ const initializePassport = () => {
 
   passport.deserializeUser(async (user, done) => {
     const manager = new UserManager();
-    let user = await manager.getOne(id);
+    user = await manager.getOne(id);
     done(null, user);
   });
 };

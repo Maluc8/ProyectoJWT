@@ -1,12 +1,22 @@
-import {Router} from express;
+import { Router } from "express";
 //import passport from "passport";
-import {forgetPassword, login, login2, logout,signup,register,fail} from "../controllers/sessionController.js";
+import {
+  //forgetPassword,
+  login,
+  current,
+  //login2,
+  //logout,
+  signup,
+  //   register,
+  //   fail,
+} from "../controllers/sessionController.js";
+import auth from "../middlewares/auth.js";
 
 const sessionRouter = Router();
 
-sessionRouter.post("/login",login);
-sessionRouter.post("/current",auth, current);
-sessionRouter.post("/signup",signup);
+sessionRouter.post("/login", login);
+sessionRouter.post("/current", auth, current);
+sessionRouter.post("/signup", signup);
 
 // sessionRouter.post("/login2",passport.authenticate("login2",{failureRedirect:"/api/sessions/fail"}),login2);
 // sessionRouter.post("/logout",logout);
