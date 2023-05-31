@@ -3,6 +3,7 @@ import { createHash, generateToken, isValidPassword } from "../utils/index.js";
 
 export const login = async (req, res) => {
   const { email, password } = req.body;
+  console.log("sessioncontroller login body\n", req.body);
 
   if (!email && !password) {
     throw new Error("Email or password invalid format.");
@@ -14,16 +15,24 @@ export const login = async (req, res) => {
   if (!isHashedPassword) {
     return res.status(401).send({ message: "Login failed, invalid password." });
   }
-  const accesToken = generateToken(user);
-  res.send({ accesToken, message: "Login success." });
+  const accessToken = await generateToken(user);
+
+  console.log("sessionController login accesToken\n", accessToken);
+  res
+    .cookie("accessToken", accessToken, {
+      maxAge: 60 * 60 * 1000,
+      httpOnly: false,
+    })
+    .send({ message: "Login success!" });
 };
 
 export const current = async (req, res) => {
+  console.log("sessionController current\n");
   res.status(200).send({ status: "Success", payload: req.user });
 };
 
 // export const logout = async (req, res) => {
-//   req.session.destroy((err) => {
+//   req..destroy((err) => {
 //     if (!err) {
 //       return res.send({ message: "Logout ok." });
 //     }
@@ -33,7 +42,7 @@ export const current = async (req, res) => {
 
 export const signup = async (req, res) => {
   const manager = new UserManager();
-
+  console.log("sessionController signup req.body\n", req.body);
   const dto = {
     ...req.body,
     password: await createHash(req.body.password, 10),

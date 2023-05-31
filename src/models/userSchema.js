@@ -4,7 +4,7 @@ import paginate from "mongoose-paginate-v2";
 const userCollection = " users";
 
 const userSchema = new Schema({
-  firstName: { type: Schema.Types.String, required: true },
+  firstName: { type: Schema.Types.String },
   lastName: { type: Schema.Types.String },
   email: { type: Schema.Types.String, unique: true, required: true },
   age: { type: Schema.Types.Number, default: 18 },

@@ -2,25 +2,18 @@ import express from "express";
 //import path from "path";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
-import { body } from "express-validator";
-import mongoStore from "connect-mongo";
+//import mongoStore from "connect-mongo";
 import cookieParser from "cookie-parser";
-import session from "express-session";
+import bodyParser from "body-parser";
 
 import cartRouter from "./routes/cartsRoutes.js";
 import productRouter from "./routes/productsRoutes.js";
 import sessionRouter from "./routes/sessionRoutes.js";
 import userRouter from "./routes/userRoutes.js";
-import initializePassport from "./config/passport.config.js";
-import passport from "passport";
 
 dotenv.config();
 
 const app = express();
-//const viewsPath = path.resolve("./views");
-//const publicPath = path.resolve("./public");
-
-//app.use(express.static(publicPath));
 
 void (async () => {
   await mongoose
@@ -34,54 +27,18 @@ void (async () => {
     console.log("Server is listening on port 8080...");
   });
 
+  app.use(bodyParser.json());
   app.use(express.urlencoded({ extended: true }));
   app.use(cookieParser());
-  app.use(
-    session({
-      store: mongoStore.create({
-        mongoUrl: process.env.MONGO_DB_URI,
-        ttl: 10,
-        dbName: "ecommerce",
-      }),
-      secret: process.env.PRIVATE_KEY,
-      resave: false,
-      saveUninitialized: false,
-    })
-  );
-  initializePassport();
   app.use("/api/sessions", sessionRouter);
   app.use("/api/users", userRouter);
-  app.use(passport.session());
 
   //Products
 
   app.get("/api/products", productRouter);
   app.get("/api/products/:id", productRouter);
-  app.post(
-    "/api/products",
-    body(
-      "title",
-      "description",
-      "price",
-      "thumbnail",
-      "code",
-      "stat"
-    ).notEmpty(),
-    productRouter
-  );
-  app.put(
-    "/api/products",
-    body(
-      "id",
-      "title",
-      "description",
-      "price",
-      "thumbnail",
-      "code",
-      "stat"
-    ).notEmpty(),
-    productRouter
-  );
+  app.post("/api/products", productRouter);
+  app.put("/api/products", productRouter);
   app.delete("/api/products", productRouter);
   //app.get("/api/realtimeproducts", productRouter);
 

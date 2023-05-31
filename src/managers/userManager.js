@@ -26,7 +26,7 @@ class UserManager {
     return this.userDao.deleteOne(id);
   }
 
-  async getOneByEmail() {
+  async getOneByEmail(email) {
     return this.userDao.getOneByEmail(email);
   }
 

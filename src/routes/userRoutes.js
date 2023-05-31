@@ -12,8 +12,8 @@ const userRouter = Router();
 
 userRouter.get("/", list);
 userRouter.get("/:id", getOne);
-userRouter.get("/", auth, save);
-userRouter.get("/:id", update);
-userRouter.get("/:id", deleteOne);
+userRouter.post("/", auth, save);
+userRouter.put("/:id", update);
+userRouter.delete("/:id", deleteOne);
 
 export default userRouter;
