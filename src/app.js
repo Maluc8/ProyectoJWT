@@ -10,6 +10,7 @@ import cartRouter from "./routes/cartsRoutes.js";
 import productRouter from "./routes/productsRoutes.js";
 import sessionRouter from "./routes/sessionRoutes.js";
 import userRouter from "./routes/userRoutes.js";
+import roleRouter from "./routes/rolesRouter.js";
 
 dotenv.config();
 
@@ -32,6 +33,7 @@ void (async () => {
   app.use(cookieParser());
   app.use("/api/sessions", sessionRouter);
   app.use("/api/users", userRouter);
+  app.use("/api/roles", roleRouter);
 
   //Products
 

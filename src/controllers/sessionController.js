@@ -31,15 +31,6 @@ export const current = async (req, res) => {
   res.status(200).send({ status: "Success", payload: req.user });
 };
 
-// export const logout = async (req, res) => {
-//   req..destroy((err) => {
-//     if (!err) {
-//       return res.send({ message: "Logout ok." });
-//     }
-//     res.status(400).send({ message: "Logout error.", body: err });
-//   });
-// };
-
 export const signup = async (req, res) => {
   const manager = new UserManager();
   console.log("sessionController signup req.body\n", req.body);

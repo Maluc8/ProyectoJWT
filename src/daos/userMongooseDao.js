@@ -6,11 +6,15 @@ class UserMongooseDao {
     const userDocuments = await userSchema.paginate({}, { limit, page });
 
     userDocuments.docs = userDocuments.docs.map((document) => ({
-      id: document._id,
-      firstName: document.firstName,
-      lastName: document.lastName,
-      email: document.email,
-      age: document.age,
+      id: document?._id,
+      firstName: document?.firstName,
+      lastName: document?.lastName,
+      email: document?.email,
+      age: document?.age,
+      password: document?.password,
+      cart: document?.cart,
+      role: document?.role,
+      isAdmin: document?.isAdmin,
     }));
     return userDocuments;
   }
@@ -21,12 +25,15 @@ class UserMongooseDao {
       throw new Error("User dont exist.");
     }
     return {
-      id: userDocument._id,
-      firstName: userDocument.firstName,
-      lastName: userDocument.lastName,
-      email: userDocument.email,
-      age: userDocument.age,
-      password: userDocument.password,
+      id: document?._id,
+      firstName: document?.firstName,
+      lastName: document?.lastName,
+      email: document?.email,
+      age: document?.age,
+      password: document?.password,
+      cart: document?.cart,
+      role: document?.role,
+      isAdmin: document?.isAdmin,
     };
   }
   async getOneByEmail(email) {
@@ -35,24 +42,30 @@ class UserMongooseDao {
       throw new Error("User dont exist.");
     }
     return {
-      id: userDocument._id,
-      firstName: userDocument.firstName,
-      lastName: userDocument.lastName,
-      email: userDocument.email,
-      age: userDocument.age,
-      password: userDocument.password,
+      id: document?._id,
+      firstName: document?.firstName,
+      lastName: document?.lastName,
+      email: document?.email,
+      age: document?.age,
+      password: document?.password,
+      cart: document?.cart,
+      role: document?.role,
+      isAdmin: document?.isAdmin,
     };
   }
 
   async create(data) {
     const userDocument = await userSchema.create(data);
     return {
-      id: userDocument._id,
-      firstName: userDocument.firstName,
-      lastName: userDocument.lastName,
-      email: userDocument.email,
-      age: userDocument.age,
-      password: userDocument.password,
+      id: document?._id,
+      firstName: document?.firstName,
+      lastName: document?.lastName,
+      email: document?.email,
+      age: document?.age,
+      password: document?.password,
+      cart: document?.cart,
+      role: document?.role,
+      isAdmin: document?.isAdmin,
     };
   }
 
@@ -66,11 +79,15 @@ class UserMongooseDao {
       throw new Error("User dont exist.");
     }
     return {
-      id: userDocument._id,
-      firstName: userDocument.firstName,
-      lastName: userDocument.lastName,
-      email: userDocument.email,
-      age: userDocument.age,
+      id: document?._id,
+      firstName: document?.firstName,
+      lastName: document?.lastName,
+      email: document?.email,
+      age: document?.age,
+      password: document?.password,
+      cart: document?.cart,
+      role: document?.role,
+      isAdmin: document?.isAdmin,
     };
   }
 
