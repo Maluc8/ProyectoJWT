@@ -1,4 +1,4 @@
-import productsManager from "../managers/productsManagers.js";
+import productsManager from "../../domain/managers/productsManagers.js";
 
 /**
  * Endpoint que devuelve una lista de productos en base a un filtro, paginación y ordenamiento.

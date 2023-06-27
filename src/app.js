@@ -1,24 +1,23 @@
 import express from "express";
 //import path from "path";
-import dotenv from "dotenv";
+
 import mongoose from "mongoose";
-//import mongoStore from "connect-mongo";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 
-import cartRouter from "./routes/cartsRoutes.js";
-import productRouter from "./routes/productsRoutes.js";
-import sessionRouter from "./routes/sessionRoutes.js";
-import userRouter from "./routes/userRoutes.js";
-import roleRouter from "./routes/rolesRouter.js";
-
-dotenv.config();
+import cartRouter from "./presentation/routes/cartsRoutes.js";
+import productRouter from "./presentation/routes/productsRoutes.js";
+import sessionRouter from "./presentation/routes/sessionRoutes.js";
+import userRouter from "./presentation/routes/userRoutes.js";
+import roleRouter from "./presentation/routes/roleRoutes.js";
+import errorHandler from "./middlewares/errorHandler.js";
+import config from "./config/index.js";
 
 const app = express();
 
 void (async () => {
   await mongoose
-    .connect(process.env.MONGO_DB_URI, {
+    .connect(config.dbUri, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })
@@ -54,4 +53,6 @@ void (async () => {
   app.delete("/api/carts", cartRouter);
   app.delete("/api/carts/:cid/products/:pid", cartRouter);
   app.delete("/api/carts/:cid", cartRouter);
+
+  app.use(errorHandler);
 })();

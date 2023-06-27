@@ -1,4 +1,4 @@
-import cartsManager from "../managers/cartsManagers.js";
+import cartsManager from "../../domain/managers/cartsManagers.js";
 
 export const list = async (req, res) => {
   const manager = new cartsManager();
