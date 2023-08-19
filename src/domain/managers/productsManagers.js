@@ -3,7 +3,7 @@
  * la clase ProductsMongooseDao para interactuar con la base de datos.
  * @module managers/productsManager
  */
-import productsMongooseDao from "../../data/daos/productsMongooseDao.js";
+import productsMongooseDao from '../../data/daos/productsMongooseDao.js';
 
 /**
  * Clase que gestiona los productos de la aplicación utilizando la clase ProductsMongooseDao para interactuar

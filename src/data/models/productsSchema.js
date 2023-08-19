@@ -1,5 +1,5 @@
-import mongoose, { Schema } from "mongoose";
-import paginate from "mongoose-paginate-v2";
+import mongoose, { Schema } from 'mongoose';
+import paginate from 'mongoose-paginate-v2';
 
 const productCollection = `products`;
 

@@ -1,7 +1,7 @@
-import mongoose, { Schema } from "mongoose";
-import paginate from "mongoose-paginate-v2";
+import mongoose, { Schema } from 'mongoose';
+import paginate from 'mongoose-paginate-v2';
 
-const roleCollection = "roles";
+const roleCollection = 'roles';
 
 const RoleSchema = new Schema({
   name: { type: Schema.Types.String, required: true },

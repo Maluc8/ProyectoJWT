@@ -1,6 +1,7 @@
-import cartsManager from "../../domain/managers/cartsManagers.js";
+import cartsManager from '../../domain/managers/cartsManagers.js';
 
 export const list = async (req, res) => {
+  console.log('cartsController list');
   const manager = new cartsManager();
   const carts = await manager.list();
   res.send({ status: `success`, carts });
@@ -26,7 +27,7 @@ export const updateOne = async (req, res) => {
     req.body.carts.id,
     req.body.carts.products
   );
-  res.send({ status: "success", carts });
+  res.send({ status: 'success', carts });
 };
 
 export const deleteOneProduct = async (req, res) => {
@@ -35,7 +36,7 @@ export const deleteOneProduct = async (req, res) => {
   const cart = await manager.getOne({ _id: cid });
   let newProducts = cart.products.filter((product) => product.id != pid);
   const newCart = await manager.updateOne(cid, newProducts);
-  res.send({ status: "succes", newCart });
+  res.send({ status: 'succes', newCart });
 };
 
 export const updateQuantity = async (req, res) => {
@@ -48,12 +49,18 @@ export const updateQuantity = async (req, res) => {
     return product;
   });
   const newCart = await manager.updateOne(req.params.cid, newProducts);
-  res.send({ status: "succes", newCart });
+  res.send({ status: 'succes', newCart });
 };
 
 export const deleteAllproducts = async (req, res) => {
   const manager = new cartsManager();
   const cart = await manager.getOne({ _id: req.params.cid });
   const newCart = await manager.updateOne(req.params.cid, {});
-  res.send({ status: "succes", newCart });
+  res.send({ status: 'succes', newCart });
+};
+
+export const closeCart = async (req, res) => {
+  const manager = new cartsManager();
+  const ticket = await manager.closeCart(req.params.id);
+  res.send({ status: 'succes', ticket });
 };

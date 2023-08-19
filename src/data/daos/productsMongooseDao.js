@@ -1,12 +1,12 @@
-import productsSchema from "../models/productsSchema.js";
+import productsSchema from '../models/productsSchema.js';
 
 // Clase que proporciona una interfaz para interactuar con la base de datos de productos utilizando Mongoose.
 class ProductsMongooseDao {
   // Encuentra los productos que coinciden con el filtro y los parámetros de consulta especificados.
   async find(filter, query) {
-    let list = await productsSchema.paginate(filter, query);
-    if (!list._id) {
-      throw new Error("Products not found.");
+    const list = await productsSchema.paginate(filter, query);
+    if (!list) {
+      throw new Error('Products not found.');
     }
     // Formatea la lista de productos para que coincida con la especificación de la API.
     list.payload = list.docs.map((product) => ({
@@ -27,8 +27,8 @@ class ProductsMongooseDao {
   // Encuentra un producto por su ID.
   async getOne(id) {
     let product = await productsSchema.find({ _id: id });
-    if (!product._id) {
-      throw new Error("Product not found.");
+    if (!product) {
+      throw new Error('Product not found.');
     }
     // Formatea el producto para que coincida con la especificación de la API.
     product = product.map((product) => ({
@@ -65,16 +65,16 @@ class ProductsMongooseDao {
   async updateOne(id, data) {
     const success = await productsSchema.updateOne({ _id: id }, data);
     if (success._id) {
-      throw new Error("Product not found.");
+      throw new Error('Product not found.');
     }
     return success.matchedCount;
   }
 
   // Elimina un producto existente por su ID.
   async deleteOne(id) {
-    let product = await productsSchema.find({ _id: id });
+    const product = await productsSchema.find({ _id: id });
     if (!product._id) {
-      throw new Error("Product not found.");
+      throw new Error('Product not found.');
     }
     product[0].stat = false;
     // Actualiza el producto para que se marque como eliminado en la base de datos.

@@ -1,5 +1,5 @@
-import cartsSchema from "../models/cartsSchema.js";
-import productsSchema from "../models/productsSchema.js";
+import cartsSchema from '../models/cartsSchema.js';
+import productsSchema from '../models/productsSchema.js';
 
 class CartsMongooseDao {
   async find() {
@@ -9,13 +9,13 @@ class CartsMongooseDao {
   async getOne(id) {
     let cart = await cartsSchema
       .find({ _id: id })
-      .populate("products.product")
+      .populate('products.product')
       .exec()
       .then((result) => {
         return result;
       })
       .catch((error) => {
-        throw new Error("Cart not found.");
+        throw new Error('Cart not found.');
       });
     const productDetails = await Promise.all(
       cart[0].products.map(async (cartProduct) => {
@@ -46,7 +46,7 @@ class CartsMongooseDao {
     try {
       await this.deleteAllProducts(idCart);
     } catch (e) {
-      throw new Error("Cart not found.");
+      throw new Error('Cart not found.');
     }
     let cart;
     product = Array.from(product);
@@ -72,7 +72,7 @@ class CartsMongooseDao {
     try {
       cart = cartsSchema.deleteOne({ _id: id });
     } catch (e) {
-      throw new Error("Cart not found.");
+      throw new Error('Cart not found.');
     }
 
     return cart;
@@ -85,7 +85,7 @@ class CartsMongooseDao {
         { $set: { products: [] } }
       );
     } catch (e) {
-      throw new Error("Cart not found.");
+      throw new Error('Cart not found.');
     }
   }
 }

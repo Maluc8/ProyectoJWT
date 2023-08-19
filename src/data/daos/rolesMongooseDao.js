@@ -1,4 +1,4 @@
-import roleSchema from "../models/rolesSchema.js";
+import roleSchema from '../models/rolesSchema.js';
 
 class RoleMongooseDao {
   async paginate(criteria) {
@@ -18,7 +18,7 @@ class RoleMongooseDao {
     const roleDocument = await roleSchema.findOne({ _id: id });
 
     if (!roleDocument) {
-      throw new Error("Role not found.");
+      throw new Error('Role not found.');
     }
 
     return {
@@ -44,7 +44,7 @@ class RoleMongooseDao {
     });
 
     if (!roleDocument) {
-      throw new Error("Role not found.");
+      throw new Error('Role not found.');
     }
 
     return {

@@ -1,10 +1,10 @@
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-// import dotenv from "dotenv";
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+// import dotenv from 'dotenv';
 // dotenv.config();
 
 export const createHash = async (password) => {
-  //console.log("index.js createHash password\n", typeof password);
+  //console.log('index.js createHash password\n', typeof password);
   return await bcrypt.hash(password, 10);
 };
 
@@ -17,7 +17,7 @@ export const generateToken = async (user) => {
     { user: { ...user, password: undefined } },
     process.env.PRIVATE_KEY,
     {
-      expiresIn: "10m",
+      expiresIn: '10m',
     }
   );
 };

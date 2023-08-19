@@ -1,4 +1,4 @@
-import productsManager from "../../domain/managers/productsManagers.js";
+import productsManager from '../../domain/managers/productsManagers.js';
 
 /**
  * Endpoint que devuelve una lista de productos en base a un filtro, paginación y ordenamiento.
@@ -7,6 +7,7 @@ import productsManager from "../../domain/managers/productsManagers.js";
  * @param {Object} res - Objeto response de Express.
  */
 export const list = async (req, res) => {
+  // console.log('productsController list');
   let products;
   let { limit, page, type, sort } = { ...req.query };
   if (type) {
@@ -15,7 +16,7 @@ export const list = async (req, res) => {
   } else {
     type = {};
   }
-  sort = sort == "asc" ? { price: 1 } : sort == "desc" ? { price: -1 } : {};
+  sort = sort == 'asc' ? { price: 1 } : sort == 'desc' ? { price: -1 } : {};
   limit = !limit ? 10 : limit;
   try {
     const manager = new productsManager();

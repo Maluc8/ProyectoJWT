@@ -1,4 +1,4 @@
-import cartsMongooseDao from "../../data/daos/cartsMongooseDao.js";
+import cartsMongooseDao from '../../data/daos/cartsMongooseDao.js';
 
 class cartsManager {
   constructor() {
@@ -31,6 +31,17 @@ class cartsManager {
 
   async deleteOneProduct(data) {
     return await this.cartsDao.deleteOneProduct(data);
+  }
+
+  async closeCart(id) {
+    const cart = this.cartsDao.getOne(id);
+    const cartUnavailable = cart.products.filter(
+      (product) => product.quantity > product.stock
+    );
+    const cartAvailable = cart.products.filter(
+      (product) => product.quantity <= product.stock
+    );
+    manager.updateOne(req.params.id, cartUnavailable);
   }
 }
 export default cartsManager;

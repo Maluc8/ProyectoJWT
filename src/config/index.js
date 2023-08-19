@@ -1,10 +1,11 @@
-import dotenv from "dotenv";
+import dotenv from 'dotenv';
 dotenv.config();
 
 const config = {
   env: process.env.NODE_ENV,
   port: process.env.NODE_PORT,
-  dbUri: process.env.MONGO_DB_URI,
+  DB: process.env.DB,
+  dbUri: process.env.DB_URI,
   privateKey: process.env.PRIVATE_KEY,
   mailKey: process.env.MAILKEY,
 };
