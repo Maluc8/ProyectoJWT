@@ -2,12 +2,12 @@ import UserManager from '../../domain/managers/userManager.js';
 import {
   createHash,
   generateToken,
-  isValidPassword,
+  isValidPassword
 } from '../../utils/index.js';
 
-export const login = async (req, res) => {
+export const login = async(req, res) => {
   const { email, password } = req.body;
-  //console.log('sessioncontroller login body\n', req.body);
+  // console.log('sessioncontroller login body\n', req.body);
 
   if (!email && !password) {
     throw new Error('Email or password invalid format.');
@@ -21,26 +21,26 @@ export const login = async (req, res) => {
   }
   const accessToken = await generateToken(user);
 
-  //console.log('sessionController login accesToken\n', accessToken);
+  // console.log('sessionController login accesToken\n', accessToken);
   res
     .cookie('accessToken', accessToken, {
       maxAge: 60 * 60 * 1000,
-      httpOnly: false,
+      httpOnly: false
     })
     .send({ message: 'Login success!' });
 };
 
-export const current = async (req, res) => {
-  //console.log('sessionController current\n');
+export const current = async(req, res) => {
+  // console.log('sessionController current\n');
   res.status(200).send({ status: 'Success', payload: req.user });
 };
 
-export const signup = async (req, res) => {
+export const signup = async(req, res) => {
   const manager = new UserManager();
-  //console.log('sessionController signup req.body\n', req.body);
+  // console.log('sessionController signup req.body\n', req.body);
   const dto = {
     ...req.body,
-    password: await createHash(req.body.password, 10),
+    password: await createHash(req.body.password, 10)
   };
 
   const user = await manager.create(dto);

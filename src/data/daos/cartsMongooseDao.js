@@ -7,7 +7,7 @@ class CartsMongooseDao {
   }
 
   async getOne(id) {
-    let cart = await cartsSchema
+    const cart = await cartsSchema
       .find({ _id: id })
       .populate('products.product')
       .exec()
@@ -18,7 +18,7 @@ class CartsMongooseDao {
         throw new Error('Cart not found.');
       });
     const productDetails = await Promise.all(
-      cart[0].products.map(async (cartProduct) => {
+      cart[0].products.map(async(cartProduct) => {
         const product = await productsSchema.find({ _id: cartProduct.product });
         return {
           id: product[0]._id.toString(),
@@ -28,7 +28,7 @@ class CartsMongooseDao {
           thumbnail: product[0].thumbnail,
           code: product[0].code,
           stock: product[0].stock,
-          quantity: cartProduct.quantity,
+          quantity: cartProduct.quantity
         };
       })
     );
@@ -36,8 +36,8 @@ class CartsMongooseDao {
   }
 
   async create(data) {
-    let cart = await cartsSchema.create({
-      products: data.products,
+    const cart = await cartsSchema.create({
+      products: data.products
     });
     return cart;
   }
@@ -45,21 +45,22 @@ class CartsMongooseDao {
   async updateOne(idCart, product) {
     try {
       await this.deleteAllProducts(idCart);
-    } catch (e) {
+    }
+ catch (e) {
       throw new Error('Cart not found.');
     }
     let cart;
     product = Array.from(product);
-    product.forEach(async (productToInsert) => {
+    product.forEach(async(productToInsert) => {
       cart = await cartsSchema.findOneAndUpdate(
         { _id: idCart },
         {
           $addToSet: {
             products: {
               product: productToInsert.id,
-              quantity: productToInsert.quantity,
-            },
-          },
+              quantity: productToInsert.quantity
+            }
+          }
         }
       );
     });
@@ -71,7 +72,8 @@ class CartsMongooseDao {
     let cart;
     try {
       cart = cartsSchema.deleteOne({ _id: id });
-    } catch (e) {
+    }
+ catch (e) {
       throw new Error('Cart not found.');
     }
 
@@ -84,7 +86,8 @@ class CartsMongooseDao {
         { _id: idCart },
         { $set: { products: [] } }
       );
-    } catch (e) {
+    }
+ catch (e) {
       throw new Error('Cart not found.');
     }
   }

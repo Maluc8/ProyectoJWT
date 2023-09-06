@@ -1,21 +1,17 @@
 import { Router } from 'express';
-//import  from '';
+
 import {
-  //forgetPassword,
+  // forgetPassword,
   login,
   current,
-  //login2,
-  //logout,
-  signup,
-  //   register,
-  //   fail,
+  signup
 } from '../controllers/sessionController.js';
 import auth from '../../middlewares/auth.js';
 
 const sessionRouter = Router();
 
-sessionRouter.post('/login', login);
-sessionRouter.post('/current', auth, current);
+sessionRouter.post('/login', login); // Probado
+sessionRouter.post('/current', auth, current); // Probado
 sessionRouter.post('/signup', signup);
 
 // sessionRouter.post('/logout',logout);

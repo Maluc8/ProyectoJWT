@@ -27,7 +27,7 @@ class UserMongooseRepository {
                 document.role.permissions
               )
             : null,
-          isAdmin: document.isAdmin,
+          isAdmin: document.isAdmin
         })
     );
     return { users, pagination };
@@ -47,11 +47,11 @@ class UserMongooseRepository {
       password: userDocument?.password,
       cart: userDocument?.cart,
       role: userDocument?.role,
-      isAdmin: userDocument?.isAdmin,
+      isAdmin: userDocument?.isAdmin
     });
   }
   async getOneByEmail(email) {
-    const userDocument = await userSchema.findOne({ email: email });
+    const userDocument = await userSchema.findOne({ email });
     if (!userDocument._id) {
       throw new Error('User not found.');
     }
@@ -64,7 +64,7 @@ class UserMongooseRepository {
       password: userDocument?.password,
       cart: userDocument?.cart,
       role: userDocument?.role,
-      isAdmin: userDocument?.isAdmin,
+      isAdmin: userDocument?.isAdmin
     });
   }
 
@@ -79,7 +79,7 @@ class UserMongooseRepository {
       password: userDocument?.password,
       cart: userDocument?.cart,
       role: userDocument?.role,
-      isAdmin: userDocument?.isAdmin,
+      isAdmin: userDocument?.isAdmin
     });
   }
 
@@ -101,7 +101,7 @@ class UserMongooseRepository {
       password: userDocument?.password,
       cart: userDocument?.cart,
       role: userDocument?.role,
-      isAdmin: userDocument?.isAdmin,
+      isAdmin: userDocument?.isAdmin
     });
   }
 

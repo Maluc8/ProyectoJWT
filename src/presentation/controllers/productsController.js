@@ -6,14 +6,15 @@ import productsManager from '../../domain/managers/productsManagers.js';
  * @param {Object} req - Objeto request de Express.
  * @param {Object} res - Objeto response de Express.
  */
-export const list = async (req, res) => {
+export const list = async(req, res) => {
   // console.log('productsController list');
   let products;
   let { limit, page, type, sort } = { ...req.query };
   if (type) {
-    type = `{ ${type}}`;
+    type = '{ ${type}}';
     type = JSON.parse(type);
-  } else {
+  }
+ else {
     type = {};
   }
   sort = sort == 'asc' ? { price: 1 } : sort == 'desc' ? { price: -1 } : {};
@@ -21,12 +22,13 @@ export const list = async (req, res) => {
   try {
     const manager = new productsManager();
     products = await manager.find(type, { limit, page, sort });
-  } catch (e) {
+  }
+ catch (e) {
     console.error(e);
-    res.send({ status: `error` }, e);
+    res.send({ status: 'error' }, e);
     return;
   }
-  res.send({ status: `success`, ...products });
+  res.send({ status: 'success', ...products });
 };
 
 /**
@@ -35,15 +37,17 @@ export const list = async (req, res) => {
  * @param {Object} req - Objeto request de Express.
  * @param {Object} res - Objeto response de Express.
  */
-export const deleteOne = async (req, res) => {
+export const deleteOne = async(req, res) => {
   try {
     const manager = new productsManager();
     const success = await manager.deleteOne(req.body.id);
-  } catch (e) {
+  }
+ catch (e) {
     console.error(e);
-    res.send({ status: `error` });
-  } finally {
-    res.send({ status: `success` });
+    res.send({ status: 'error' });
+  }
+ finally {
+    res.send({ status: 'success' });
   }
 };
 
@@ -53,16 +57,19 @@ export const deleteOne = async (req, res) => {
  * @param {Object} req - Objeto request de Express.
  * @param {Object} res - Objeto response de Express.
  */
-export const getOne = async (req, res) => {
+export const getOne = async(req, res) => {
+  // console.log('productsController getOne');
   let products;
   try {
     const manager = new productsManager();
     products = await manager.getOne(req.params.id);
-  } catch (e) {
-    console.error(e);
-    res.send({ status: `error` }, e);
-  } finally {
-    res.send({ status: `success`, products });
+  }
+ catch (e) {
+    // console.error(e);
+    res.send({ status: 400, message: 'not found', e });
+  }
+ finally {
+    res.status(200).send(products);
   }
 };
 
@@ -72,20 +79,22 @@ export const getOne = async (req, res) => {
  * @param {Object} req - Objeto request de Express.
  * @param {Object} res - Objeto response de Express.
  */
-export const save = async (req, res) => {
+export const save = async(req, res) => {
   let products;
   try {
     const manager = new productsManager();
     products = await manager.create(req.body);
-  } catch (e) {
+  }
+ catch (e) {
     console.error(e);
-    res.send({ status: `error` }, e);
+    res.send({ status: 'error' }, e);
     return;
   }
   if (products) {
-    res.send({ status: `success`, products });
-  } else {
-    res.send({ status: `repeated code` });
+    res.send({ status: 'success', products });
+  }
+ else {
+    res.send({ status: 'repeated code' });
   }
 };
 
@@ -95,7 +104,7 @@ export const save = async (req, res) => {
  * @param {Object} req - Objeto request de Express.
  * @param {Object} res - Objeto response de Express.
  */
-export const update = async (req, res) => {
+export const update = async(req, res) => {
   let success;
   try {
     const manager = new productsManager();
@@ -107,16 +116,18 @@ export const update = async (req, res) => {
       thumbnail: req.body.thumbnail,
       code: req.body.code,
       stock: req.body.stock,
-      stat: req.body.stat,
+      stat: req.body.stat
     };
     success = await manager.updateOne(id, data);
-  } catch (e) {
+  }
+ catch (e) {
     console.error(e);
-    res.send({ status: `Error` }, e);
+    res.send({ status: 'Error' }, e);
   }
   if (success) {
-    res.send({ status: `success` });
-  } else {
-    res.send({ status: `No se encontro` });
+    res.send({ status: 'success' });
+  }
+ else {
+    res.send({ status: 'No se encontro' });
   }
 };

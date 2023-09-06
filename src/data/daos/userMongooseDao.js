@@ -14,7 +14,7 @@ class UserMongooseDao {
       password: document?.password,
       cart: document?.cart,
       role: document?.role,
-      isAdmin: document?.isAdmin,
+      isAdmin: document?.isAdmin
     }));
     return userDocuments;
   }
@@ -33,11 +33,11 @@ class UserMongooseDao {
       password: userDocument?.password,
       cart: userDocument?.cart,
       role: userDocument?.role,
-      isAdmin: userDocument?.isAdmin,
+      isAdmin: userDocument?.isAdmin
     };
   }
   async getOneByEmail(email) {
-    const userDocument = await userSchema.findOne({ email: email });
+    const userDocument = await userSchema.findOne({ email });
     if (!userDocument._id) {
       throw new Error('User not found.');
     }
@@ -50,7 +50,7 @@ class UserMongooseDao {
       password: userDocument?.password,
       cart: userDocument?.cart,
       role: userDocument?.role,
-      isAdmin: userDocument?.isAdmin,
+      isAdmin: userDocument?.isAdmin
     };
   }
 
@@ -65,7 +65,7 @@ class UserMongooseDao {
       password: userDocument?.password,
       cart: userDocument?.cart,
       role: userDocument?.role,
-      isAdmin: userDocument?.isAdmin,
+      isAdmin: userDocument?.isAdmin
     };
   }
 
@@ -87,7 +87,7 @@ class UserMongooseDao {
       password: document?.password,
       cart: document?.cart,
       role: document?.role,
-      isAdmin: document?.isAdmin,
+      isAdmin: document?.isAdmin
     };
   }
 

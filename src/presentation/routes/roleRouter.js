@@ -5,7 +5,7 @@ import {
   deleteOne,
   getOne,
   save,
-  update,
+  update
 } from '../controllers/rolesController.js';
 import authorization from '../../middlewares/authorization.js';
 

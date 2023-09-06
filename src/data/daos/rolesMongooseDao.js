@@ -8,7 +8,7 @@ class RoleMongooseDao {
     roleDocuments.docs = roleDocuments.docs.map((document) => ({
       id: document._id,
       name: document.name,
-      permissions: document.permissions,
+      permissions: document.permissions
     }));
 
     return roleDocuments;
@@ -24,7 +24,7 @@ class RoleMongooseDao {
     return {
       id: roleDocument?._id,
       name: roleDocument?.name,
-      permissions: roleDocument?.permissions,
+      permissions: roleDocument?.permissions
     };
   }
 
@@ -34,13 +34,13 @@ class RoleMongooseDao {
     return {
       id: roleDocument._id,
       name: roleDocument.name,
-      permissions: roleDocument.permissions,
+      permissions: roleDocument.permissions
     };
   }
 
   async updateOne(id, data) {
     const roleDocument = await roleSchema.findOneAndUpdate({ _id: id }, data, {
-      new: true,
+      new: true
     });
 
     if (!roleDocument) {
@@ -50,7 +50,7 @@ class RoleMongooseDao {
     return {
       id: roleDocument._id,
       name: roleDocument.name,
-      permissions: roleDocument.permissions,
+      permissions: roleDocument.permissions
     };
   }
 

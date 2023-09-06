@@ -10,13 +10,14 @@ const container = createContainer();
 
 if (process.env.DB === 'MongooseAdapter') {
   container.register('UserRepository', asClass(UserMongooseRepository), {
-    lifetime: Lifetime.SINGLETON,
+    lifetime: Lifetime.SINGLETON
   });
   container.register('RoleRepository', asClass(RoleMongooseRepository), {
-    lifetime: Lifetime.SINGLETON,
+    lifetime: Lifetime.SINGLETON
   });
-} else if (process.env.DB === 'FileAdapter') {
-  console.log('Falta hacer el FileAdapter.');
+}
+ else if (process.env.DB === 'FileAdapter') {
+  console.log('Acá va el FileAdapter.');
 }
 
 export default container;

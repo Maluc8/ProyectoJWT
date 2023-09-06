@@ -1,0 +1,24 @@
+Pasarela de pagos *** faltan un par de cositas
+deploy
+
+mailing
+Realizar un sistema de recuperación de contraseña, la cual envíe por medio de un correo un botón 
+que redireccione a una página para restablecer la contraseña (no recuperarla).
+link del correo debe expirar después de 1 hora de enviado.
+Si se trata de restablecer la contraseña con la misma contraseña del usuario, debe impedirlo e 
+indicarle que no se puede colocar la misma contraseña
+Si el link expiró, debe redirigir a una vista que le permita generar nuevamente el correo de 
+restablecimiento, el cual contará con una nueva duración de 1 hora. (NO ES OBLIGATORIA)
+
+
+faker js (mocking)
+supertest clase 37
+usuario current puede modificar su carro unicamente:
+
+logger
+Después implementar un logger para desarrollo y un logger para producción, el logger de desarrollo 
+deberá loggear a partir del nivel debug, sólo en consola
+Sin embargo, el logger del entorno productivo debería loggear sólo a partir de nivel info.
+Agregar logs de valor alto en los puntos importantes de tu servidor (errores, advertencias, etc) y 
+modificar los console.log() habituales que tenemos para que muestren todo a partir de winston.
+Crear un endpoint /loggerTest que permita probar todos los logs

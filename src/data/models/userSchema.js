@@ -11,16 +11,16 @@ const userSchema = new Schema({
   password: { type: Schema.Types.String },
   cart: { type: Schema.Types.ObjectId, ref: 'carts' },
   role: { type: Schema.Types.ObjectId, index: true, ref: 'roles' },
-  isAdmin: { type: Schema.Types.Boolean, default: false },
+  isAdmin: { type: Schema.Types.Boolean, default: false }
 });
 
 userSchema.plugin(paginate);
 
-userSchema.pre('find', function () {
+userSchema.pre('find', function() {
   this.populate(['role']);
 });
 
-userSchema.pre('findOne', function () {
+userSchema.pre('findOne', function() {
   this.populate(['role']);
 });
 

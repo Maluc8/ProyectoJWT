@@ -17,7 +17,7 @@ class ProductsMongooseDao {
       thumbnail: product.thumbnail,
       code: product.code,
       stock: product.stock,
-      stat: product.stat,
+      stat: product.stat
     }));
     // Elimina los documentos originales de la lista de productos ya que se van a mostrar de otra manera.
     list.docs = undefined;
@@ -39,7 +39,7 @@ class ProductsMongooseDao {
       thumbnail: product.thumbnail,
       code: product.code,
       stock: product.stock,
-      stat: product.stat,
+      stat: product.stat
     }));
     return product;
   }
@@ -56,7 +56,7 @@ class ProductsMongooseDao {
       thumbnail: product.thumbnail,
       code: product.code,
       stock: product.stock,
-      stat: product.stat,
+      stat: product.stat
     };
     return product;
   }

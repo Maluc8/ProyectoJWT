@@ -11,7 +11,7 @@ class RoleMongooseRepository {
 
     const roles = docs.map((document) => new Role(document._id, document.name));
 
-    return roles, pagination;
+    return { roles, pagination };
   }
 
   async getOne(id) {
@@ -32,7 +32,7 @@ class RoleMongooseRepository {
 
   async updateOne(id, data) {
     const roleDocument = await roleSchema.findOneAndUpdate({ _id: id }, data, {
-      new: true,
+      new: true
     });
 
     if (!roleDocument) {

@@ -9,7 +9,7 @@ const auth = (req, res, next) => {
   const token = authHeader.split(' ')[1];
   // console.log('auth auth token\n', token);
   jwt.verify(token, process.env.PRIVATE_KEY, (error, credentials) => {
-    //console.log('auth auth credentials\n', credentials);
+    // console.log('auth auth credentials\n', credentials);
     if (error) {
       req.logger.warn(
         `Authentication error. - ${new Date().toLocaleTimeString()}`

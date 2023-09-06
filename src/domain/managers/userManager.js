@@ -1,4 +1,5 @@
 import container from '../../container.js';
+import { createHash } from '../../utils/index.js';
 
 class UserManager {
   constructor() {
@@ -14,7 +15,11 @@ class UserManager {
   }
 
   async create(data) {
-    const user = await this.userRepository.create(data);
+    const dto = {
+      ...data,
+      password: await createHash(data.password, 10)
+    };
+    const user = await this.userRepository.create(dto);
     return { ...user, password: undefined };
   }
 

@@ -5,7 +5,7 @@ const roleCollection = 'roles';
 
 const RoleSchema = new Schema({
   name: { type: Schema.Types.String, required: true },
-  permissions: [{ type: Schema.Types.String }],
+  permissions: [{ type: Schema.Types.String }]
 });
 
 RoleSchema.plugin(paginate);

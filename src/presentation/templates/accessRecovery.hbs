@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access Recovery</title>
+</head>
+<body>
+    <h1>Access Recovery page</h1>
+    <form action="/email/submit/{{userId}}" method="put">
+        <label for="pass">New password:</label><br>
+        <input type="text" id="pass" name="pass"><br>
+        <input type="hidden" name="_csrf" value={{csrfToken}}>
+        <input type="submit" value="Submit">
+    </form> 
+</body>
+</html>

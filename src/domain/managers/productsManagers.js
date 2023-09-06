@@ -48,11 +48,12 @@ class productsManager {
    * con el mismo código; de lo contrario, resuelve con false.
    */
   async create(data) {
-    let exist = await this.productsDao.findCode(data.code);
+    const exist = await this.productsDao.findCode(data.code);
     if (!exist.length) {
       const product = await this.productsDao.create(data);
       return product;
-    } else {
+    }
+ else {
       return false;
     }
   }

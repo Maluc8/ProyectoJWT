@@ -4,7 +4,7 @@ class MongooseAdapter {
   async init(uri) {
     this.connection = await mongoose.connect(uri, {
       useNewUrlParser: true,
-      useUnifiedTopology: true,
+      useUnifiedTopology: true
     });
     console.log('Conected to DB');
   }

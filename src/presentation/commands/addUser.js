@@ -1,23 +1,27 @@
+/*
+ Ejemplo de uso:
+ npm run command -- addUser -e "maluc8@gmail.com" -fn Marcelo -ln Cuello -p 123456 -a 44 -ia true
+*/
+
 import { Command } from 'commander';
-import UserManager from '../managers/userManager.js';
+import UserManager from '../../domain/managers/userManager.js';
 
 const AddUserCommand = new Command('addUser');
 
 AddUserCommand.version('0.0.1')
   .description('Add user')
-  .option('-e, --email <email>', 'User`s email')
-  .option('-fn, --firstName <firstName>', 'User`s first name')
-  .option('-ln, --lastName <lastName>', 'User`s last name')
-  .option('-p, --password <password>', 'User`s password')
-  .option('-a, --age <age>', 'User`s age')
-  .option('-ia, --isAdmin <isAdmin>', 'User`s isAdmin')
-  .action(async (env) => {
+  .option('-e, --email <email>', 'User\'s email')
+  .option('-fn, --firstName <firstName>', 'User\'s first name')
+  .option('-ln, --lastName <lastName>', 'User\'s last name')
+  .option('-p, --password <password>', 'User\'s password')
+  .option('-a, --age <age>', 'User\'s age')
+  .option('-ia, --isAdmin <isAdmin>', 'User\'s isAdmin')
+  .action(async(env) => {
     const payload = {
       ...env,
-      age: +env.age,
-      isAdmin: env.isAdmin === 'true',
+      // age: env.age,
+      isAdmin: env.isAdmin === 'true'
     };
-
     const manager = new UserManager();
     const user = await manager.create(payload);
 
